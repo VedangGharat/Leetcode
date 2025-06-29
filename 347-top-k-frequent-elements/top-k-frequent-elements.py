@@ -1,17 +1,18 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        hmap = {}
-        for i in nums: 
-            hmap[i] = hmap.get(i, 0) + 1
+        count_hmap = {}
+        for i in nums:
+            count_hmap[i] = count_hmap.get(i, 0) + 1
 
-        elements = [ [] for i in range(len(nums)+1)]
+        freq = [[] for i in range(len(nums)+1)]
 
-        for key, value in hmap.items():
-            elements[value].append(key)
+        for ke, v in count_hmap.items():
+            freq[v].append(ke)
 
         res = []
-        for i in range(len(elements)-1, -1,-1):
-            for e in elements[i]:
-                res.append(e)
+        for val_range in range(len(freq)-1, -1, -1):
+            for val in freq[val_range]:
+                res.append(val)
                 if len(res) == k:
-                    return (res)
+                    return res
+
