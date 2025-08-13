@@ -1,11 +1,12 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        hmap = {"]":"[", ")":"(", "}":"{"}
+        hashMap = {")":"(", "]":"[", "}":"{"}
         stack = []
         for p in s:
-            if p in hmap.values():
+            if p in hashMap.values():
                 stack.append(p)
-            elif stack and stack[-1] == hmap[p]:
+            elif stack and stack[-1] == hashMap[p]:
                 stack.pop()
-            else: return False
+            else:
+                return False
         return stack == []
