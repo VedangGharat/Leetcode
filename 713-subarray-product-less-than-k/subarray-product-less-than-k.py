@@ -11,5 +11,5 @@ class Solution:
                 prod //= nums[left]
                 left+=1
             res += (r-left+1)
-
+            print(res)
         return res
