@@ -1,27 +1,31 @@
 class Solution:
     def getAverages(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        windowSize = 2*k+1
         if k == 0:
             return nums
-
-        if 2*k+1 > len(nums):
-            return [-1] * (len(nums))
         
-
-        prefix = [nums[0]]
-        for i in range(1,len(nums)):
-            prefix.append(prefix[-1] + nums[i]) 
-            # prefix.append(prefix[i-1] + nums[i])
+        if n < windowSize:
+            return [-1] * n
         
-        ans = [-1] * k
+        presum = [nums[0]]
+        for i in range(1, n):
+            presum.append(presum[-1] + nums[i])
 
+        averages = [-1] * k
+    
         for i in range(k, len(nums)-k):
-            if i - k == 0:
-                ans.append((prefix[i+k])//(2*k+1))
+            inboundval = i+k
+            outboundval = i-k-1
+            if i-k == 0:
+                averages.append(presum[inboundval] // windowSize)
             else:
-                ans.append((prefix[i+k]-prefix[i-k-1])//(2*k+1))
-            
-        for i in range(k):
-            ans.append(-1)
-        return ans
+                averages.append((presum[inboundval]-presum[outboundval]) // windowSize)
+        
+        for i in range(n-k, n):
+            averages.append(-1)
+        
+        return averages
+        
 
-
+        
