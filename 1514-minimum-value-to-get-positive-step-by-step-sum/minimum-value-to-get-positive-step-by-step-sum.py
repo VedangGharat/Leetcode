@@ -6,4 +6,4 @@ class Solution:
             val += n
             minval = min(val, minval)
         
-        return 1-minval if minval < 1 else -1
+        return 1-minval #if minval < 1 else -1
